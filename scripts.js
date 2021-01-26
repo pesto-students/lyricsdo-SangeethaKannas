@@ -6,7 +6,7 @@ const LYRICS_NOT_FOUND = `<div "class="alert alert-danger" role="alert">
 const BASE_URL = 'https://api.lyrics.ovh/';
 
 
-const fetchData = async (SEARCH_URL, resultsElement, callback) => {
+const fetchData = async (SEARCH_URL, resultsElement, callback, mode = 'cors') => {
 
     const httpHeaders = new Headers();
         httpHeaders.append('pragma', 'no-store');
@@ -14,15 +14,20 @@ const fetchData = async (SEARCH_URL, resultsElement, callback) => {
 
     const httpInit = {
         headers: httpHeaders,
-        mode: 'cors'
+        mode: mode
     };
+
+    const overlay = document.querySelector(".overlay");
+    overlay.style.display = 'flex';
 
     fetch(SEARCH_URL, httpInit)
         .then(response => response.json())
         .then(data => callback(data))
         .then(innerHtml => resultsElement.innerHTML = innerHtml )
+        .then(() => overlay.style.display = 'none')
         .catch((error) => {
             console.error(error);
+            overlay.style.display = 'none'
             resultsElement.innerHTML = LYRICS_NOT_FOUND
         })
 }
@@ -51,15 +56,17 @@ const init = () => {
 }
 
 const generateTable = (lyricsObj) => {
-    return `<div class="card">
+    return `<div>
         <table>
             ${lyricsObj.data.reduce((acc, lyric) => acc +
                 `<tr>
                     <td>
-                        <div>
-                            ${lyric.artist.name} ${lyric.title}
-                            <button onclick='showlyrics("${BASE_URL}v1","${lyric.artist.name}","${lyric.title}")'>
-                                Show Lyrics
+                        <div class="lyric">
+                            <span class="lyric-detail">${lyric.artist.name} ${lyric.title}</span>
+                            <button class="show-lyrics-btn"
+                                 onclick='showlyrics("${BASE_URL}v1","${lyric.artist.name}", "${lyric.title}")'>
+                                <i class="fa fa-list"></i>
+                                <span class="show-lyrics">Show Lyrics</span>
                             </button>
                         </div>
                     </td>
@@ -68,7 +75,7 @@ const generateTable = (lyricsObj) => {
         <footer>
             <button class="nav-buttons" id="prev-btn">Previous</button>
             <button class="nav-buttons" id="next-btn"
-            onclick="fetchData(searchElement.value, ${lyricsObj.next})">Next</button>
+            onclick="fetchData('${lyricsObj.next}', document.getElementById('results'),generateTable, 'no-cors')">Next</button>
         </footer>
     </div>`;
 }

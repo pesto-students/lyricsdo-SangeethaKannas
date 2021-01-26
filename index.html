@@ -18,24 +18,31 @@
   </head>
   <body>
     <div class="container">
-      <h1>LyricsDo</h1>
-      <div class="input-group input-group-lg mb-3">
-        <form method="post" name="search-form">
+      <section class="top-section">
 
-          <input
-            id="search-box"
-            type="text"
-            class="form-control"
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-lg"
-            placeholder="Enter artist or song name..."
-          />
-          <button class="btn btn-primary" id="submit-btn" disabled type="button">
-            Search
-          </button>
-        </form>
-      </div>
-      <div id="results"></div>
+        <h1>LyricsDo</h1>
+        <div class="input-group input-group-lg mb-3">
+          <form method="post" name="search-form" class="search-form">
+            <input
+              id="search-box"
+              type="text"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-lg"
+              placeholder="Enter artist or song name..."
+            />
+            <button class="btn btn-primary" id="submit-btn" disabled type="button">
+              Search
+            </button>
+          </form>
+        </div>
+      </section>
+      <section class="bottom-section">
+        <div id="results"></div>
+      </section>
+    </div>
+    <div class="overlay">
+      <div class="spinner"></div>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
