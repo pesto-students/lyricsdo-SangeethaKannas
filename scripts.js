@@ -1,10 +1,9 @@
-'use stric';
+'use strict';
 
 const LYRICS_NOT_FOUND = `<div "class="alert alert-danger" role="alert">
                                 No lyrics Found!!
                             </div>`;
 const BASE_URL = 'https://api.lyrics.ovh/';
-
 
 const fetchData = async (SEARCH_URL, resultsElement, callback, mode = 'cors') => {
 
@@ -62,7 +61,10 @@ const generateTable = (lyricsObj) => {
                 `<tr>
                     <td>
                         <div class="lyric">
-                            <span class="lyric-detail">${lyric.artist.name} ${lyric.title}</span>
+                            <span class="lyric-detail">
+                                <span class="artist">${lyric.artist.name}</span>
+                                <span class="title">${lyric.title}</span>
+                            </span>
                             <button class="show-lyrics-btn"
                                  onclick='showlyrics("${BASE_URL}v1","${lyric.artist.name}", "${lyric.title}")'>
                                 <i class="fa fa-list"></i>
@@ -81,7 +83,7 @@ const generateTable = (lyricsObj) => {
 }
 
 const generateLyricsTable = (lyricObj) => `<section>
-            ${lyricObj.lyrics.length > 0 ? lyricObj.lyrics.replace("\n",  "<br>") : 'No Lyrics Found.'}
+            ${lyricObj.lyrics.length > 0 ? lyricObj.lyrics.replaceAll("\n", "<span class='lyric-break'>") : 'No Lyrics Found.'}
         <section>`;
 
 const showlyrics = async (link, artist, title) => {
