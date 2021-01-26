@@ -33,6 +33,8 @@ textarea:focus, input:focus{
 
 .search-form {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .search-input {
@@ -112,8 +114,9 @@ textarea:focus, input:focus{
 .lyric {
   text-align: left;
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
+  width: 70vw;
 }
 
 .show-lyrics-btn {
@@ -138,10 +141,27 @@ textarea:focus, input:focus{
     display: inline-block;
   }
 
+  .lyric {
+    width: 83vw;
+  }
+
 }
 
 .form-control:focus {
   border-color: inherit;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+.lyric-break {
+  display: block;
+  margin: 1rem 0;
+}
+
+.artist {
+  font-weight: bold;
+}
+
+.title {
+  font-style: italic;
 }
