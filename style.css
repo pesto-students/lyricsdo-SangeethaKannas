@@ -63,6 +63,10 @@ textarea:focus, input:focus{
 .top-section {
   height: 30%;
   background-image: url('./assets/hero-background-small.jpg') 50%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .bottom-section {
@@ -72,6 +76,7 @@ textarea:focus, input:focus{
 
 .container {
   height: 100%;
+  max-width: 50%;
 }
 
 .overlay {
@@ -90,7 +95,7 @@ textarea:focus, input:focus{
 }
 
 .spinner {
-    border: 16px solid #f3f3f3;
+  border: 16px solid #f3f3f3;
   border-radius: 50%;
   border-top: 16px solid #3498db;
   display: block;
